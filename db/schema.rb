@@ -10,17 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720145413) do
+ActiveRecord::Schema.define(version: 20170809081724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
-
-  create_table "boolean_answers", force: :cascade do |t|
-    t.boolean "answer", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -31,62 +25,15 @@ ActiveRecord::Schema.define(version: 20170720145413) do
     t.string "email"
   end
 
-  create_table "entries", force: :cascade do |t|
-    t.bigint "inspection_id", null: false
-    t.bigint "question_id", null: false
-    t.string "answer_type"
-    t.bigint "answer_id"
-    t.integer "position", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["answer_type", "answer_id"], name: "index_entries_on_answer_type_and_answer_id"
-    t.index ["inspection_id"], name: "index_entries_on_inspection_id"
-    t.index ["question_id"], name: "index_entries_on_question_id"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.bigint "project_id"
-    t.string "file", null: false
-    t.text "description"
-    t.datetime "taken_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_images_on_project_id"
-  end
-
-  create_table "inspections", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.date "at_date", null: false
-    t.integer "kind", default: 0, null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_inspections_on_project_id"
-  end
-
-  create_table "projects", force: :cascade do |t|
+  create_table "mowers", force: :cascade do |t|
     t.bigint "customer_id"
-    t.string "title"
-    t.text "description"
-    t.integer "status", default: 0, null: false
+    t.integer "brand", default: 0, null: false
+    t.string "model"
+    t.integer "year"
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_projects_on_customer_id"
-    t.index ["status"], name: "index_projects_on_status"
-  end
-
-  create_table "questions", force: :cascade do |t|
-    t.string "question", null: false
-    t.integer "kind", default: 0, null: false
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "text_answers", force: :cascade do |t|
-    t.text "answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_mowers_on_customer_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -103,9 +50,5 @@ ActiveRecord::Schema.define(version: 20170720145413) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
-  add_foreign_key "entries", "inspections"
-  add_foreign_key "entries", "questions"
-  add_foreign_key "images", "projects"
-  add_foreign_key "inspections", "projects"
-  add_foreign_key "projects", "customers"
+  add_foreign_key "mowers", "customers"
 end
