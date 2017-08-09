@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Customer < ApplicationRecord
+  has_many(:mowers)
   validates(:name, :phone, :address, :email, presence: true)
 
   scope(:text_search, lambda do |str|

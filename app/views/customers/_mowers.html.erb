@@ -1,17 +1,16 @@
-<div class="card project">
+<div class="card mower">
   <header class="card-header">
     <p class="card-header-title">
       <%= title %>
     </p>
-      <%= project_tag(status) %>
   </header>
   <div class="card-content">
     <div class="media">
       <div class="media-content">
         <ul>
-          <% projects.each do |project| %>
+          <% mowers.each do |mower| %>
             <li>
-              <%= link_to(project, project_path(project)) %>
+              <%= link_to(mower, mower_path(mower)) %>
             </li>
           <% end %>
         </ul>
