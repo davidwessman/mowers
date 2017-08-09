@@ -15,7 +15,7 @@ class MowersController < ApplicationController
   def create
     @mower = Mower.new(mower_params)
     if @mower.save
-      redirect_to(mower_path(@mower), notice: t('.success'))
+      redirect_to(edit_mower_path(@mower), notice: t('.success'))
     else
       render(:new, status: 422)
     end
@@ -36,7 +36,7 @@ class MowersController < ApplicationController
   def update
     @mower = Mower.find(params[:id])
     if @mower.update(mower_params)
-      redirect_to(mower_path(@mower), notice: t('.success'))
+      redirect_to(edit_mower_path(@mower), notice: t('.success'))
     else
       render(:edit, status: 422)
     end

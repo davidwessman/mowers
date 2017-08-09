@@ -1,0 +1,28 @@
+sv:
+  mowers:
+    index:
+      title: Gräsklippareer
+
+    create:
+      success: Gräsklippare skapades
+
+    update:
+      success: Gräsklippare uppdaterades
+
+    panel:
+      all_mowers: Alla gräsklippare
+      edit_mower: Redigera gräsklippare
+      show_mower: Visa gräsklippare
+      new_mower: Lägg till ny gräsklippare
+
+    new:
+      title: Ny gräsklippare
+
+    destroy:
+      success: Gräsklippare raderades!
+
+    edit:
+      title: Redigera gräsklippare
+
+    table:
+      show: Visa

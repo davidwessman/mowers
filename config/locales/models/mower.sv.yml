@@ -1,0 +1,17 @@
+sv:
+  model:
+    mower:
+      none: "nope"
+
+  activerecord:
+    models:
+      mower: Gräsklippare
+
+    attributes:
+      mower:
+        brand: Märke
+        comment: Kommentar
+        customer_id: Kund
+        customer: Kund
+        model: Modell
+        year: Tillverkningsår

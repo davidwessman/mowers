@@ -3,9 +3,9 @@
 class SearchesController < ApplicationController
   before_action(:require_login)
 
-  def project
-    @projects = Project.includes(:customer)
-                       .text_search(search_param)
+  def mower
+    @mowers = Mower.includes(:customer)
+                   .text_search(search_param)
   end
 
   def customer

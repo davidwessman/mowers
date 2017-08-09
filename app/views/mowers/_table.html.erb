@@ -1,0 +1,26 @@
+<% headline ||= nil %>
+<% if headline.present? %>
+  <h4 class="subtitle"><%= headline %></h4>
+<% end %>
+<table class="table is-striped is-fullwidth">
+  <thead>
+    <tr>
+      <td> <%= Mower.human_attribute_name(:customer) %></td>
+      <td> <%= Mower.model_name.human %></td>
+      <td> <%= Mower.human_attribute_name(:brand) %></td>
+      <td> <%= Mower.human_attribute_name(:model) %></td>
+      <td> <%= Mower.human_attribute_name(:year) %></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% mowers.each do |mower| %>
+      <tr>
+        <td> <%= mower.customer %> </td>
+        <td> <%= link_to(t('.show'), edit_mower_path(mower), class: 'button is-primary is-small') %> </td>
+        <td> <%= mower_brand(mower.brand) %> </td>
+        <td> <%= mower.model %> </td>
+        <td> <%= mower.year %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

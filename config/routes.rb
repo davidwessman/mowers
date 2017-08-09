@@ -15,9 +15,12 @@ Rails.application.routes.draw do
   get(:sign_up, controller: 'clearance/users', action: :new, path: 'sign-up')
 
   resources(:customers)
+  resources(:mowers, except: %i[show])
 
   resource(:search, only: []) do
     post(:customer)
+    post(:mower)
   end
+
   root(controller: :home, action: :index)
 end

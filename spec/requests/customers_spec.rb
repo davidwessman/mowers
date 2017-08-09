@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe('Searches', type: :request) do
-  it('renders project page, then create a new customer') do
+RSpec.describe('Customers', type: :request) do
+  it('renders customers index, then creates a new customer') do
     sign_in
     get(customers_path)
     expect(response).to have_http_status(200)

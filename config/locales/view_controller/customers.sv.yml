@@ -10,7 +10,7 @@ sv:
       success: Kund uppdaterades
 
     customer:
-      project_id: "Kundnr: %{id}"
+      customer_id: "Kundnr: %{id}"
 
     panel:
       all_customers: Alla kunder
@@ -19,10 +19,8 @@ sv:
       new_customer: Lägg till ny kund
 
     show:
+      mowers: Gräsklippare
       title: Kund
-      active_projects: Aktiva Projekt
-      completed_projects: Avslutade Projekt
-      paused_projects: Pausade Projekt
 
     new:
       title: Ny kund

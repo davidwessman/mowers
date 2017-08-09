@@ -1,0 +1,8 @@
+<%= simple_form_for(mower) do |f| %>
+  <%= f.association(:customer, collection: Customer.all, input_html: { autofocus: true }) %>
+  <%= f.input(:brand, collection: mower_brands,
+                      selected: mower.brand) %>
+  <%= f.input(:model) %>
+  <%= f.input(:year) %>
+  <%= bulma_button(f) %>
+<% end %>

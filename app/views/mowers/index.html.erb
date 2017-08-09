@@ -1,0 +1,12 @@
+<h1 class="title is-1"><%= t('.title') %></h1>
+
+<% content_for(:sidemenu) do %>
+  <%= render('panel', active: :index, mower: @mower) %>
+<% end %>
+
+<div class="columns">
+  <div class="column">
+    <%= render('/searches/form', target: :mower) %>
+    <%= render('table', mowers: @mowers) %>
+  </div>
+</div>

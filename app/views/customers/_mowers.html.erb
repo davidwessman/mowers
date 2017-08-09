@@ -10,7 +10,7 @@
         <ul>
           <% mowers.each do |mower| %>
             <li>
-              <%= link_to(mower, mower_path(mower)) %>
+              <%= link_to(mower, edit_mower_path(mower)) %>
             </li>
           <% end %>
         </ul>
