@@ -8,10 +8,7 @@ end
 ruby '2.4.1'
 gem 'rails', '~> 5.1.3'
 
-gem 'carrierwave'
-gem 'carrierwave-aws'
 gem 'clearance' # Authentication
-gem 'dropbox_api'
 gem 'font-awesome-rails'
 gem 'mini_magick'
 gem 'pg'
@@ -22,7 +19,6 @@ gem 'skylight' # Monitoring
 gem 'textacular', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'webpacker-react', '~> 0.3.1'
 gem 'webpacker'
 
 group :development, :test do

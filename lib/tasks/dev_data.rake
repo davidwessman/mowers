@@ -15,6 +15,6 @@ namespace(:db) do
     puts "=== email: admin@wessman.co ==="
     puts "=== pass: passpass ==="
 
-    10.times { FactoryGirl.create(:project) }
+    10.times { FactoryGirl.create(:customer) }
   end
 end

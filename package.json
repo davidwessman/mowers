@@ -11,8 +11,6 @@
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.24.1",
     "bulma": "^0.5.1",
-    "coffee-loader": "^0.7.3",
-    "coffee-script": "^1.12.6",
     "compression-webpack-plugin": "^0.4.0",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -28,17 +26,13 @@
     "precss": "^1.4.0",
     "prop-types": "^15.5.10",
     "rails-erb-loader": "^5.0.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react_ujs": "^2.2.0",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.2",
     "turbolinks": "^5.0.3",
     "webpack": "^3.0.0-rc.1",
     "webpack-manifest-plugin": "^1.1.0",
-    "webpack-merge": "^4.1.0",
-    "webpacker-react": "^0.3.0"
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

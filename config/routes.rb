@@ -14,34 +14,10 @@ Rails.application.routes.draw do
                     path: 'sign-out')
   get(:sign_up, controller: 'clearance/users', action: :new, path: 'sign-up')
 
-  resources(:home)
   resources(:customers)
-  resources(:time_entries, only: %i[index new])
-  resources(:projects) do
-    resources(:images, only: %i[create update destroy index new edit])
-    resources(:inspections) do
-      resources(:answers, only: %i[create update destroy])
-    end
-  end
 
-  resources(:inspections, only: []) do
-    resources(:entries, only: %i[create destroy]) do
-      resources(:boolean_answers, only: %i[create update])
-      resources(:text_answers, only: %i[create update])
-    end
-  end
-
-  resources(:questions, only: %i[create new index edit update destroy])
   resource(:search, only: []) do
-    post(:project)
     post(:customer)
   end
-
-  resource(:dropbox, controller: :dropbox, only: []) do
-    post(:entries)
-    post(:link)
-    post(:folder)
-  end
-
   root(controller: :home, action: :index)
 end

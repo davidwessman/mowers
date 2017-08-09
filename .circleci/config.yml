@@ -1,17 +1,17 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/inspections
+    working_directory: ~/mowers
     docker:
       - image: circleci/ruby:2.4.1-node
         environment:
           PGHOST: 127.0.0.1
-          PGUSER: inspector
+          PGUSER: mower
           RAILS_ENV: test
       - image: circleci/postgres:9.6.3-alpine
         environment:
-          POSTGRES_USER: inspector
-          POSTGRES_DB: inspections_test
+          POSTGRES_USER: mower
+          POSTGRES_DB: mowers_test
           POSTGRES_PASSWORD: ""
     steps:
       - checkout
