@@ -10,6 +10,7 @@ gem 'rails', '~> 5.1.3'
 
 gem 'clearance' # Authentication
 gem 'font-awesome-rails'
+gem 'jbuilder'
 gem 'mini_magick'
 gem 'pg'
 gem 'puma', '~> 3.7'
@@ -20,6 +21,7 @@ gem 'textacular', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
+gem 'webpacker-react'
 
 group :development, :test do
   gem 'bullet'
