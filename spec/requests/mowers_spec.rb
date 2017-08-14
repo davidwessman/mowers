@@ -13,11 +13,11 @@ RSpec.describe('Mowers', type: :request) do
                    brand: :husqvarna,
                    model: 'AM 330',
                    year: '2017' }
-    post(mowers_path, params: { mower: attributes })
+    post(mowers_path, params: { mower: attributes }.to_json,
+                      headers: json_header)
     mower = Mower.last
-    expect(response).to redirect_to(edit_mower_path(mower))
-    follow_redirect!
     expect(response).to have_http_status(200)
+    expect(response.body).to include('AM 330')
 
     expect(mower.husqvarna?).to be_truthy
   end
