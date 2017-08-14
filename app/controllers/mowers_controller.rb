@@ -13,12 +13,8 @@ class MowersController < ApplicationController
   end
 
   def create
-    @mower = Mower.new(mower_params)
-    if @mower.save
-      redirect_to(edit_mower_path(@mower), notice: t('.success'))
-    else
-      render(:new, status: 422)
-    end
+    mower = Mower.create!(mower_params)
+    render(json: mower, status: :ok)
   end
 
   def edit
@@ -45,6 +41,6 @@ class MowersController < ApplicationController
   private
 
   def mower_params
-    params.require(:mower).permit(:customer_id, :brand, :model)
+    params.require(:mower).permit(:customer_id, :brand, :model, :year)
   end
 end

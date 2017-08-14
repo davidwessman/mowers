@@ -1,3 +1,3 @@
 class Job < ApplicationRecord
-  belongs_to :mower
+  belongs_to(:mower)
 end
