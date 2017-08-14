@@ -28,10 +28,12 @@ RSpec.describe('Mowers', type: :request) do
     get(edit_mower_path(mower))
     expect(response).to have_http_status(200)
 
-    patch(mower_path(mower), params: { mower: { brand: :husqvarna } })
-    expect(response).to redirect_to(edit_mower_path(mower))
+    patch(mower_path(mower), params: { mower: { brand: :husqvarna } }.to_json,
+                             headers: json_header)
+    mower = Mower.last
+    expect(response).to have_http_status(200)
+    expect(response.body).to include('husqvarna')
 
-    mower.reload
     expect(mower.husqvarna?).to be_truthy
 
     delete(mower_path(mower))
