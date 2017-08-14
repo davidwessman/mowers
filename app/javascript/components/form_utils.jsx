@@ -10,7 +10,7 @@ class InputField extends React.Component {
 
     return (
       <div className="field">
-        <label className="label" htmlFor="{this.props.id}">{this.props.title}</label>
+        <label className="label" htmlFor={this.props.id}>{this.props.title}</label>
         <p className="control">
           <input
             className="input"
@@ -18,6 +18,7 @@ class InputField extends React.Component {
             placeholder={this.props.title}
             name={this.props.id}
             defaultValue={this.props.value}
+            value={this.props.value}
             onChange={this.props.onChange}
           />
         </p>

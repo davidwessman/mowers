@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputField from 'components/form_utils';
+import Select from 'react-select';
 
 class MowerForm extends React.Component {
   render() {
@@ -10,19 +11,24 @@ class MowerForm extends React.Component {
         errors[key] = this.props.errors[key][0];
       });
     }
+    const options = [];
+    if (this.props.brands) {
+      Object.keys(this.props.brands).forEach((key) => {
+        options.push({ value: key, label: this.props.brands[key] })
+      });
+    }
 
     return (
       <form className="form" onSubmit={this.props.onFormSubmit}>
-        <InputField
-          error={errors.phone}
-          id="brand"
-          title="Märke"
-          onChange={this.props.onInputChange}
+        <Select
+          name="brand-select"
           value={this.props.fields.brand}
+          options={options}
+          onChange={this.props.onBrandChange}
           type="text"
         />
         <InputField
-          error={errors.email}
+          error={errors.model}
           id="model"
           title="Modell"
           onChange={this.props.onInputChange}
@@ -49,25 +55,25 @@ class MowerForm extends React.Component {
   }
 }
 
-MowerForm.propTypes = {
-  fields: PropTypes.shape(
-    {
-      brand: PropTypes.string,
-      model: PropTypes.string,
-      year: PropTypes.integer,
-    },
-  ).isRequired,
-  errors: PropTypes.shape({
-    brand: PropTypes.string,
-    model: PropTypes.string,
-    year: PropTypes.string,
-  }),
-  onInputChange: PropTypes.func.isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
-};
-
-MowerForm.defaultProps = {
-  errors: {},
-};
+// MowerForm.propTypes = {
+//   fields: PropTypes.shape(
+//     {
+//       brand: PropTypes.string,
+//       model: PropTypes.string,
+//       year: PropTypes.integer,
+//     },
+//   ).isRequired,
+//   errors: PropTypes.shape({
+//     brand: PropTypes.string,
+//     model: PropTypes.string,
+//     year: PropTypes.string,
+//   }),
+//   onInputChange: PropTypes.func.isRequired,
+//   onFormSubmit: PropTypes.func.isRequired,
+// };
+//
+// MowerForm.defaultProps = {
+//   errors: {},
+// };
 
 export default MowerForm;

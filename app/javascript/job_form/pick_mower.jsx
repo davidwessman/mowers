@@ -24,6 +24,7 @@ class PickMower extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBrandChange = this.handleBrandChange.bind(this);
     this.formParams = this.formParams.bind(this);
   }
 
@@ -80,6 +81,16 @@ class PickMower extends React.Component {
     });
   }
 
+  handleBrandChange(selected) {
+    console.log(selected);
+    const newFields = Object.assign({}, this.state.fields);
+    newFields.brand = selected.value;
+
+    this.setState({
+      fields: newFields,
+    });
+  }
+
   render() {
     if (!this.props.show) {
       return null;
@@ -96,6 +107,7 @@ class PickMower extends React.Component {
               errors={this.state.errors}
               fields={this.state.fields}
               onInputChange={this.handleInputChange}
+              onBrandChange={this.handleBrandChange}
               onFormSubmit={this.handleFormSubmit}
               brands={this.props.brands}
             />
