@@ -4,8 +4,7 @@ class SearchesController < ApplicationController
   before_action(:require_login)
 
   def mower
-    @mowers = Mower.includes(:customer)
-                   .text_search(search_param)
+    @mowers = Mower.where(customer: params[:customer_id])
   end
 
   def customer

@@ -3,6 +3,7 @@
 class Customer < ApplicationRecord
   has_many(:mowers)
   validates(:name, :phone, :address, :email, presence: true)
+  validates(:phone, :email, uniqueness: true)
 
   scope(:text_search, lambda do |str|
     fuzzy_search({ name: str, phone: str, address: str, email: str }, false)

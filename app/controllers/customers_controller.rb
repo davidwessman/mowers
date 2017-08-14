@@ -13,12 +13,8 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new(customer_params)
-    if @customer.save
-      redirect_to(customer_path(@customer), notice: t('.success'))
-    else
-      render(:new, status: 422)
-    end
+    customer = Customer.create!(customer_params)
+    render(json: customer, status: :ok)
   end
 
   def edit

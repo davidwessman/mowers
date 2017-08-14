@@ -10,6 +10,7 @@ gem 'rails', '~> 5.1.3'
 
 gem 'clearance' # Authentication
 gem 'font-awesome-rails'
+gem 'jbuilder'
 gem 'mini_magick'
 gem 'pg'
 gem 'puma', '~> 3.7'
@@ -20,6 +21,7 @@ gem 'textacular', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
+gem 'webpacker-react'
 
 group :development, :test do
   gem 'bullet'
@@ -35,8 +37,9 @@ end
 group :development do
   gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
+  gem 'rails_real_favicon'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring'
   gem 'web-console', '>= 3.3.0'
 end
 

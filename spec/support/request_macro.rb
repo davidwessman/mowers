@@ -13,4 +13,8 @@ module RequestMacro
     post(session_path, params: attributes)
     follow_redirect!
   end
+
+  def json_header
+    { "CONTENT_TYPE": "application/json" }
+  end
 end

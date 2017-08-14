@@ -6,7 +6,11 @@ module MowerHelper
     Mower.brands.keys.map { |k| [mower_brand(k), k] }
   end
 
+  def mower_brands_h
+    Mower.brands.keys.map { |k| [k, mower_brand(k)] }.to_h
+  end
+
   def mower_brand(key)
-    t("models.mower.brand.#{key}")
+    t("model.mower.brand.#{key}")
   end
 end

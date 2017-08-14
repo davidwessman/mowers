@@ -1,4 +1,5 @@
-<%= simple_form_for(mower) do |f| %>
+<% url ||= nil %>
+<%= simple_form_for(mower, url: url) do |f| %>
   <%= f.association(:customer, collection: Customer.all, input_html: { autofocus: true }) %>
   <%= f.input(:brand, collection: mower_brands,
                       selected: mower.brand) %>

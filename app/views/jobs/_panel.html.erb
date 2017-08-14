@@ -1,0 +1,10 @@
+<% active ||= :none %>
+<p class="menu-label">
+  <%= Job.model_name.human(count: 2) %>
+</p>
+<ul class="menu-list">
+  <%= active_menu(jobs_path, active, :index) do %>
+    <%= fa_icon('list') %>
+    <%= t('.all_jobs') %>
+  <% end %>
+</ul>

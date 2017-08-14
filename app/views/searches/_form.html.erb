@@ -1,4 +1,4 @@
-<% target ||= :customer %>
+<% target ||= :customers %>
 <%= simple_form_for(:search, url: url_for(controller: :searches, action: target),
                              method: :post,
                              remote: true) do |f| %>

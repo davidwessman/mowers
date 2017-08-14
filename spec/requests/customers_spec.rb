@@ -9,12 +9,12 @@ RSpec.describe('Customers', type: :request) do
     attributes = { name: 'David', phone: '070560',
                    address: 'Havet, 26376 Nyhamnsläge',
                    email: 'david@wessman.co' }
-    post(customers_path, params: { customer: attributes })
+    headers = { "CONTENT_TYPE": "application/json" }
+    post(customers_path, params: { customer: attributes }.to_json,
+                         headers: headers)
     customer = Customer.last
-    expect(response).to redirect_to(customer_path(customer))
-    follow_redirect!
     expect(response).to have_http_status(200)
-
+    expect(response.body).to include('Havet, 26376 Nyhamnsläge')
     expect(customer.name).to eq('David')
   end
 end

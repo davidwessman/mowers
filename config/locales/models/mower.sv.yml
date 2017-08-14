@@ -1,6 +1,12 @@
 sv:
   model:
     mower:
+      brand:
+        husqvarna: "Husqvarna"
+        klippo: "Klippo"
+        other: "Annat"
+        stiga: "Stiga"
+
       none: "nope"
 
   activerecord:

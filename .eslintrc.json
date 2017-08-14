@@ -10,9 +10,10 @@
       }
     },
     "rules": {
-      "extensions": 0,
-      "no-extraneous-unresolved": 0,
-      "no-param-reassign": 1,
-      "no-unresolved": 0
+      "import/extensions": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-extraneous-unresolved": 0,
+      "import/no-unresolved": 0,
+      "no-param-reassign": 1
     }
 }
