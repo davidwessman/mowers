@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MowerForm from 'mowers/form';
+import NewMower from 'mowers/new';
 import MowersTable from 'mowers/table';
 
 class PickMower extends React.Component {
@@ -8,29 +9,19 @@ class PickMower extends React.Component {
     super(props);
     this.state = {
       mowers: [],
-      fields: {
-        brand: '',
-        model: '',
-        year: '',
-      },
-      errors: {
-        address: '',
-        phone: '',
-        email: '',
+      mower: {
+        customer_id: this.props.customer.id,
       },
     };
+
     const tokenElem = document.querySelector('meta[name="csrf-token"]');
     this.token = tokenElem && tokenElem.getAttribute('content');
 
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleBrandChange = this.handleBrandChange.bind(this);
-    this.formParams = this.formParams.bind(this);
+    this.getMowers = this.getMowers.bind(this);
   }
 
-  handleFormSubmit(e) {
-    e.preventDefault();
-    fetch('/mowers', {
+  getMowers(customer_id) {
+    fetch('/search/mower', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -38,56 +29,22 @@ class PickMower extends React.Component {
         'X-Requested-With': 'XMLHttpRequest',
         'X-CSRF-Token': this.token,
       },
-      body: JSON.stringify(this.formParams()),
+      body: JSON.stringify({
+        customer_id,
+      }),
       credentials: 'same-origin',
     })
     .then(response => response.json())
     .then((data) => {
-      if (data.errors !== undefined) {
+      if ('mowers' in data) {
+        this.setState({
+          mowers: data.mowers,
+        });
+      } else {
         this.setState({
           errors: data.errors,
         });
-      } else {
-        this.props.onSelect(data);
-        this.setState({
-          mower: data,
-          mowers: [data],
-          fields: {
-            brand: '', model: '', year: '',
-          },
-          errors: {},
-        });
       }
-    });
-  }
-
-  formParams() {
-    const fields = Object.assign({}, this.state.fields);
-    fields.customer_id = this.props.customer.id;
-
-    return { mower: fields };
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    const newForm = Object.assign({}, this.state.fields);
-    newForm[name] = value;
-
-    this.setState({
-      fields: newForm,
-    });
-  }
-
-  handleBrandChange(selected) {
-    console.log(selected);
-    const newFields = Object.assign({}, this.state.fields);
-    newFields.brand = selected.value;
-
-    this.setState({
-      fields: newFields,
     });
   }
 
@@ -103,12 +60,9 @@ class PickMower extends React.Component {
         </div>
         <div className="columns">
           <div className="column is-6">
-            <MowerForm
-              errors={this.state.errors}
-              fields={this.state.fields}
-              onInputChange={this.handleInputChange}
-              onBrandChange={this.handleBrandChange}
-              onFormSubmit={this.handleFormSubmit}
+            <NewMower
+              mower={this.state.mower}
+              onCreate={this.props.onSelect}
               brands={this.props.brands}
             />
           </div>

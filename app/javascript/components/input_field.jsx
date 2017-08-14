@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ErrorField from 'components/error_field';
 
 class InputField extends React.Component {
   render() {
@@ -30,7 +31,7 @@ class InputField extends React.Component {
 InputField.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,
@@ -38,20 +39,8 @@ InputField.propTypes = {
 
 InputField.defaultProps = {
   error: null,
+  value: '',
 };
 
-class ErrorField extends React.Component {
-  render() {
-    return (
-      <p className="help is-danger">
-        {this.props.message}
-      </p>
-    );
-  }
-}
-
-ErrorField.propTypes = {
-  message: PropTypes.string.isRequired,
-};
 
 export default InputField;

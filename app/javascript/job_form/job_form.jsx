@@ -4,13 +4,13 @@ import PickCustomer from 'job_form/pick_customer';
 import Customer from 'customers/customer';
 import PickMower from 'job_form/pick_mower';
 import Mower from 'mowers/mower';
-import InputField from 'components/form_utils';
 
 class JobForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       customer: props.customer,
+      edit_mower: false,
       mower: props.mower,
       mower_id: (props.mower !== undefined) ? props.mower.id : undefined,
       mowers: props.mowers,
@@ -18,40 +18,13 @@ class JobForm extends React.Component {
     const tokenElem = document.querySelector('meta[name="csrf-token"]');
     this.token = tokenElem && tokenElem.getAttribute('content');
 
+    this.allowMowerEdit = this.allowMowerEdit.bind(this);
+    this.deselectMower = this.deselectMower.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.selectCustomer = this.selectCustomer.bind(this);
     this.selectMower = this.selectMower.bind(this);
-    this.deselectMower = this.deselectMower.bind(this);
-    this.getMowers = this.getMowers.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  getMowers(id) {
-    fetch('/search/mower', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': this.token,
-      },
-      body: JSON.stringify({
-        customer_id: id,
-      }),
-      credentials: 'same-origin',
-    })
-    .then(response => response.json())
-    .then((data) => {
-      if ('mowers' in data) {
-        this.setState({
-          mowers: data.mowers,
-        });
-      } else {
-        this.setState({
-          errors: data.errors,
-        });
-      }
-    });
-  }
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -94,6 +67,7 @@ class JobForm extends React.Component {
     this.setState({
       mower,
       mower_id: mower.id,
+      edit_mower: false,
     });
   }
 
@@ -102,9 +76,14 @@ class JobForm extends React.Component {
       mower: undefined,
       mower_id: undefined,
     });
-    this.getMowers(this.state.customer.id);
+    this.pick_mower.getMowers(this.state.customer.id);
   }
 
+  allowMowerEdit() {
+    this.setState({
+      edit_mower: true,
+    });
+  }
 
   render() {
     return (
@@ -114,11 +93,18 @@ class JobForm extends React.Component {
           <Mower
             mower={this.state.mower}
             brands={this.props.brands}
-            onClick={this.deselectMower}
+            edit={this.state.edit_mower}
+            onDeselect={this.deselectMower}
+            onEditClick={this.allowMowerEdit}
+            onSelect={this.selectMower}
           />
         </div>
-        <PickCustomer onSelect={this.selectCustomer} show={this.state.customer === undefined} />
+        <PickCustomer
+          onSelect={this.selectCustomer}
+          show={this.state.customer === undefined}
+        />
         <PickMower
+          ref={(p) => { this.pick_mower = p; }}
           onSelect={this.selectMower}
           customer={this.state.customer}
           show={this.state.mower === undefined && this.state.customer !== undefined}

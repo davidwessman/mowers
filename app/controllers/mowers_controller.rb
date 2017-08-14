@@ -30,12 +30,9 @@ class MowersController < ApplicationController
   end
 
   def update
-    @mower = Mower.find(params[:id])
-    if @mower.update(mower_params)
-      redirect_to(edit_mower_path(@mower), notice: t('.success'))
-    else
-      render(:edit, status: 422)
-    end
+    mower = Mower.find(params[:id])
+    mower.update!(mower_params)
+    render(json: mower, status: :ok)
   end
 
   private
