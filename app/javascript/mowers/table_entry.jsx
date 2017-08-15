@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 
 class TableEntry extends React.Component {
   render() {
@@ -20,5 +21,11 @@ class TableEntry extends React.Component {
     );
   }
 }
+
+TableEntry.propTypes = {
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  brand: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default TableEntry;

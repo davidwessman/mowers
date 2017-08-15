@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import InputField from 'components/input_field';
 import SelectField from 'components/select_field';
 
@@ -20,7 +21,8 @@ class MowerForm extends React.Component {
   }
 
   onBrandChange(selected) {
-    this.props.setState('brand', selected.value);
+    const value = (selected !== null) ? selected.value : '';
+    this.props.setState('brand', value);
   }
 
   render() {
@@ -68,25 +70,20 @@ class MowerForm extends React.Component {
   }
 }
 
-// MowerForm.propTypes = {
-//   mower: PropTypes.shape(
-//     {
-//       brand: PropTypes.string,
-//       model: PropTypes.string,
-//       year: PropTypes.integer,
-//     },
-//   ).isRequired,
-//   errors: PropTypes.shape({
-//     brand: PropTypes.string,
-//     model: PropTypes.string,
-//     year: PropTypes.string,
-//   }),
-//   onInputChange: PropTypes.func.isRequired,
-//   onFormSubmit: PropTypes.func.isRequired,
-// };
-//
-// MowerForm.defaultProps = {
-//   errors: {},
-// };
+MowerForm.propTypes = {
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  errors: PropTypes.shape({
+    brand: PropTypes.string,
+    model: PropTypes.string,
+    year: PropTypes.string,
+  }),
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
+};
+
+MowerForm.defaultProps = {
+  errors: {},
+};
 
 export default MowerForm;

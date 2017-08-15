@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 class Icon extends React.Component {
   render() {
@@ -8,5 +8,13 @@ class Icon extends React.Component {
     );
   }
 }
+
+Icon.propTypes = {
+  icon: PropTypes.string,
+};
+
+Icon.defaultProps = {
+  icon: 'heart',
+};
 
 export default Icon;

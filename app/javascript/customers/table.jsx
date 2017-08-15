@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import TableCustomer from 'customers/table_customer';
 
 class CustomersTable extends React.Component {
@@ -33,8 +34,9 @@ class CustomersTable extends React.Component {
   }
 }
 
-// CustomersTable.propTypes = {
-//   customers: CustomerUtils.arrayOf().isRequired,
-// };
+CustomersTable.propTypes = {
+  customers: PropTypes.arrayOf(PropHelper.customer()).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default CustomersTable;

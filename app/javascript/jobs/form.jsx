@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PickCustomer from 'job_form/pick_customer';
+import PropHelper from 'components/prop_helper';
+import PickCustomer from 'jobs/pick_customer';
 import Customer from 'customers/customer';
-import PickMower from 'job_form/pick_mower';
+import PickMower from 'jobs/pick_mower';
 import Mower from 'mowers/mower';
 
 class JobForm extends React.Component {
@@ -12,7 +13,7 @@ class JobForm extends React.Component {
       customer: props.customer,
       edit_mower: false,
       mower: props.mower,
-      mower_id: (props.mower !== undefined) ? props.mower.id : undefined,
+      mower_id: props.mower.id,
       mowers: props.mowers,
     };
     const tokenElem = document.querySelector('meta[name="csrf-token"]');
@@ -60,7 +61,7 @@ class JobForm extends React.Component {
     this.setState({
       customer,
     });
-    this.getMowers(customer.id);
+    this.pick_mower.setCustomer(customer.id);
   }
 
   selectMower(mower) {
@@ -73,7 +74,7 @@ class JobForm extends React.Component {
 
   deselectMower() {
     this.setState({
-      mower: undefined,
+      mower: {},
       mower_id: undefined,
     });
     this.pick_mower.getMowers(this.state.customer.id);
@@ -101,17 +102,17 @@ class JobForm extends React.Component {
         </div>
         <PickCustomer
           onSelect={this.selectCustomer}
-          show={this.state.customer === undefined}
+          show={this.state.customer.id === undefined}
         />
         <PickMower
           ref={(p) => { this.pick_mower = p; }}
           onSelect={this.selectMower}
           customer={this.state.customer}
-          show={this.state.mower === undefined && this.state.customer !== undefined}
+          show={this.state.mower.id === undefined && this.state.customer.id !== undefined}
           mowers={this.state.mowers}
           brands={this.props.brands}
         />
-        <hr/>
+        <hr />
         <form className="form" onSubmit={this.handleFormSubmit}>
           <input
             className="hidden"
@@ -132,21 +133,18 @@ class JobForm extends React.Component {
   }
 }
 
-// JobForm.propTypes = {
-//   fields: PropTypes.shape(
-//   ).isRequired,
-//   errors: PropTypes.shape({
-//     address: PropTypes.string,
-//     email: PropTypes.string,
-//     name: PropTypes.string,
-//     phone: PropTypes.string,
-//   }),
-//   onInputChange: PropTypes.func.isRequired,
-//   onFormSubmit: PropTypes.func.isRequired,
-// };
-//
-// JobForm.defaultProps = {
-//   errors: {},
-// };
+JobForm.propTypes = {
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  customer: PropTypes.shape(PropHelper.customer()),
+  mower: PropTypes.shape(PropHelper.mower()),
+  mowers: PropTypes.arrayOf(PropTypes.shape(PropHelper.mower())),
+};
+
+JobForm.defaultProps = {
+  customer: {},
+  errors: {},
+  mower: {},
+  mowers: [],
+};
 
 export default JobForm;

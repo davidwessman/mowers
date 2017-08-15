@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputField from 'components/form_utils';
+import InputField from 'components/input_field';
 
 class CustomerForm extends React.Component {
   render() {
@@ -67,7 +67,7 @@ CustomerForm.propTypes = {
     },
   ).isRequired,
   errors: PropTypes.shape({
-    address: [PropTypes.string],
+    address: PropTypes.string,
     email: PropTypes.string,
     name: PropTypes.string,
     phone: PropTypes.string,
@@ -78,6 +78,12 @@ CustomerForm.propTypes = {
 };
 
 CustomerForm.defaultProps = {
+  fields: {
+    address: '',
+    email: '',
+    name: '',
+    phone: '',
+  },
   errors: {},
 };
 
