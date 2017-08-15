@@ -8,18 +8,13 @@ class PickCustomer extends React.Component {
     super(props);
     this.state = {
       customers: [],
-      fields: {
+      customer: {
         address: '',
-        phone: '',
         email: '',
         name: '',
-      },
-      errors: {
-        address: '',
         phone: '',
-        email: '',
-        name: '',
       },
+      errors: {},
     };
     const tokenElem = document.querySelector('meta[name="csrf-token"]');
     this.token = tokenElem && tokenElem.getAttribute('content');
@@ -40,7 +35,7 @@ class PickCustomer extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        customer: this.state.fields,
+        customer: this.state.customer,
       }),
       credentials: 'same-origin',
     })
@@ -55,9 +50,6 @@ class PickCustomer extends React.Component {
         this.setState({
           customer: data,
           customers: [],
-          fields: {
-            name: '', phone: '', address: '', email: '',
-          },
           errors: {},
         });
       }
@@ -69,11 +61,11 @@ class PickCustomer extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    const newForm = Object.assign({}, this.state.fields);
+    const newForm = Object.assign({}, this.state.customer);
     newForm[name] = value;
 
     this.setState({
-      fields: newForm,
+      customer: newForm,
     });
   }
 
@@ -88,7 +80,7 @@ class PickCustomer extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        search: { text: this.state.fields.phone },
+        search: { text: this.state.customer.phone },
       }),
       credentials: 'same-origin',
     })
@@ -120,7 +112,7 @@ class PickCustomer extends React.Component {
           <div className="column is-6">
             <CustomerForm
               errors={this.state.errors}
-              fields={this.state.fields}
+              fields={this.state.customer}
               onPhoneChange={this.handlePhoneChange}
               onInputChange={this.handleInputChange}
               onFormSubmit={this.handleFormSubmit}
@@ -138,21 +130,13 @@ class PickCustomer extends React.Component {
   }
 }
 
-// JobForm.propTypes = {
-//   fields: PropTypes.shape(
-//   ).isRequired,
-//   errors: PropTypes.shape({
-//     address: PropTypes.string,
-//     email: PropTypes.string,
-//     name: PropTypes.string,
-//     phone: PropTypes.string,
-//   }),
-//   onInputChange: PropTypes.func.isRequired,
-//   onFormSubmit: PropTypes.func.isRequired,
-// };
-//
-// JobForm.defaultProps = {
-//   errors: {},
-// };
+PickCustomer.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+};
+
+PickCustomer.defaultProps = {
+  show: true,
+};
 
 export default PickCustomer;

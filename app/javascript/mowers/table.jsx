@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import TableEntry from 'mowers/table_entry';
 
 class MowersTable extends React.Component {
@@ -35,8 +36,14 @@ class MowersTable extends React.Component {
   }
 }
 
-// MowersTable.propTypes = {
-//   mowers: CustomerUtils.arrayOf().isRequired,
-// };
+MowersTable.propTypes = {
+  mowers: PropTypes.arrayOf(PropTypes.shape(PropHelper.mower())).isRequired,
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+MowersTable.defaultProps = {
+  errors: {},
+};
 
 export default MowersTable;

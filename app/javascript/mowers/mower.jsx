@@ -1,11 +1,12 @@
 import React from 'react';
 import Icon from 'components/icon';
-import MowerForm from 'mowers/form';
+import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import EditMower from 'mowers/edit';
 
 class Mower extends React.Component {
   render() {
-    if (this.props.mower === undefined) return null;
+    if (this.props.mower.id === undefined) return null;
 
     if (this.props.edit) {
       return (
@@ -16,7 +17,7 @@ class Mower extends React.Component {
             brands={this.props.brands}
           />
         </div>
-      )
+      );
     }
 
     return (
@@ -26,9 +27,14 @@ class Mower extends React.Component {
             <p className="card-header-title">
               Gräsklippare
             </p>
-            <a className="card-header-icon" onClick={this.props.onDeselect}>
+            <a
+              role="button"
+              className="card-header-icon"
+              onClick={this.props.onDeselect}
+              tabIndex={-1}
+            >
               Avmarkera &nbsp;
-              <Icon icon="times"/>
+              <Icon icon="times" />
             </a>
           </header>
           <div className="card-content">
@@ -42,9 +48,14 @@ class Mower extends React.Component {
                 </ul>
               </div>
             </div>
-            <a className="button is-primary" onClick={this.props.onEditClick}>
+            <a
+              role="button"
+              className="button is-primary"
+              onClick={this.props.onEditClick}
+              tabIndex={0}
+            >
               Redigera &nbsp;
-              <Icon icon="wrench"/>
+              <Icon icon="wrench" />
             </a>
           </div>
         </div>
@@ -52,5 +63,25 @@ class Mower extends React.Component {
     );
   }
 }
+
+EditMower.propTypes = {
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  errors: PropTypes.shape(PropHelper.mower()),
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
+
+Mower.propTypes = {
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  edit: PropTypes.bool,
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  onDeselect: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
+
+Mower.defaultProps = {
+  edit: false,
+};
 
 export default Mower;

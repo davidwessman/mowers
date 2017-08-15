@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import MowerForm from 'mowers/form';
 
 class EditMower extends React.Component {
@@ -19,7 +20,7 @@ class EditMower extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    fetch('/mowers/' + this.props.mower.id, {
+    fetch(`/mowers/${this.props.mower.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -40,10 +41,6 @@ class EditMower extends React.Component {
         });
       } else {
         this.props.onUpdate(data);
-        this.setState({
-          mower: data,
-          errors: {},
-        });
       }
     });
   }
@@ -72,21 +69,15 @@ class EditMower extends React.Component {
   }
 }
 
-// JobForm.propTypes = {
-//   mower: PropTypes.shape(
-//   ).isRequired,
-//   errors: PropTypes.shape({
-//     address: PropTypes.string,
-//     email: PropTypes.string,
-//     name: PropTypes.string,
-//     phone: PropTypes.string,
-//   }),
-//   onInputChange: PropTypes.func.isRequired,
-//   onFormSubmit: PropTypes.func.isRequired,
-// };
-//
-// JobForm.defaultProps = {
-//   errors: {},
-// };
+EditMower.propTypes = {
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  errors: PropTypes.shape(PropHelper.mower()),
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+};
+
+EditMower.defaultProps = {
+  errors: {},
+};
 
 export default EditMower;

@@ -13,7 +13,7 @@ class SelectField extends React.Component {
     const options = [];
     if (this.props.options) {
       Object.keys(this.props.options).forEach((key) => {
-        options.push({ value: key, label: this.props.options[key] })
+        options.push({ value: key, label: this.props.options[key] });
       });
     }
 
@@ -27,7 +27,6 @@ class SelectField extends React.Component {
             options={options}
             onChange={this.props.onChange}
             type="text"
-            focus={this.props.focus}
           />
         </div>
         {error}
@@ -37,11 +36,15 @@ class SelectField extends React.Component {
 }
 
 SelectField.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  error: PropTypes.string,
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  error: PropTypes.string,
+  options: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+  value: PropTypes.string,
 };
 
 SelectField.defaultProps = {

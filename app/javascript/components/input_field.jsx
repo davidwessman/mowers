@@ -31,7 +31,10 @@ class InputField extends React.Component {
 InputField.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.string,

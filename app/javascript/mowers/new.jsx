@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import MowerForm from 'mowers/form';
 
 class NewMower extends React.Component {
@@ -28,7 +29,7 @@ class NewMower extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        mower: this.state.mower
+        mower: this.state.mower,
       }),
       credentials: 'same-origin',
     })
@@ -68,22 +69,9 @@ class NewMower extends React.Component {
 }
 
 NewMower.propTypes = {
-  mower: PropTypes.shape({
-    brand: PropTypes.string,
-    model: PropTypes.string,
-    year: PropTypes.string,
-    customer_id: PropTypes.number,
-  }).isRequired,
-  errors: PropTypes.shape({
-    brand: PropTypes.string,
-    model: PropTypes.string,
-    year: PropTypes.string,
-    customer_id: PropTypes.number,
-  }),
-  brands: PropTypes.shape({
-    value: PropTypes.string,
-    label: PropTypes.string,
-  }).isRequired,
+  mower: PropTypes.shape(PropHelper.mower()).isRequired,
+  errors: PropTypes.shape(PropHelper.mower()),
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
   onCreate: PropTypes.func.isRequired,
 };
 

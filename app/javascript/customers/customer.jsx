@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import Icon from 'components/icon';
 
 class Customer extends React.Component {
   render() {
-    if (this.props.customer === undefined) return null;
+    if (this.props.customer.id === undefined) return null;
 
     return (
       <div className="column is-6">
@@ -31,5 +33,9 @@ class Customer extends React.Component {
     );
   }
 }
+
+Customer.propTypes = {
+  customer: PropTypes.shape(PropHelper.customer()).isRequired,
+};
 
 export default Customer;

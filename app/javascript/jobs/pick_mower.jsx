@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MowerForm from 'mowers/form';
+import PropHelper from 'components/prop_helper';
 import NewMower from 'mowers/new';
 import MowersTable from 'mowers/table';
 
@@ -8,7 +8,7 @@ class PickMower extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mowers: [],
+      mowers: this.props.mowers,
       mower: {
         customer_id: this.props.customer.id,
       },
@@ -18,9 +18,19 @@ class PickMower extends React.Component {
     this.token = tokenElem && tokenElem.getAttribute('content');
 
     this.getMowers = this.getMowers.bind(this);
+    this.setCustomer = this.setCustomer.bind(this);
   }
 
-  getMowers(customer_id) {
+  setCustomer(customerId) {
+    this.setState({
+      mower: {
+        customer_id: customerId,
+      },
+    });
+    this.getMowers(customerId);
+  }
+
+  getMowers(customerId) {
     fetch('/search/mower', {
       method: 'post',
       headers: {
@@ -30,7 +40,7 @@ class PickMower extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        customer_id,
+        customer_id: customerId,
       }),
       credentials: 'same-origin',
     })
@@ -68,7 +78,7 @@ class PickMower extends React.Component {
           </div>
           <div className="column">
             <MowersTable
-              mowers={this.props.mowers}
+              mowers={this.state.mowers}
               onClick={this.props.onSelect}
               brands={this.props.brands}
             />
@@ -79,21 +89,19 @@ class PickMower extends React.Component {
   }
 }
 
-// JobForm.propTypes = {
-//   fields: PropTypes.shape(
-//   ).isRequired,
-//   errors: PropTypes.shape({
-//     address: PropTypes.string,
-//     email: PropTypes.string,
-//     name: PropTypes.string,
-//     phone: PropTypes.string,
-//   }),
-//   onInputChange: PropTypes.func.isRequired,
-//   onFormSubmit: PropTypes.func.isRequired,
-// };
-//
-// JobForm.defaultProps = {
-//   errors: {},
-// };
+PickMower.propTypes = {
+  brands: PropTypes.shape(PropHelper.brands()).isRequired,
+  customer: PropTypes.shape(),
+  mowers: PropTypes.arrayOf(PropTypes.shape()),
+  onSelect: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+};
+
+PickMower.defaultProps = {
+  customer: {},
+  errors: {},
+  mowers: [],
+  show: true,
+};
 
 export default PickMower;
