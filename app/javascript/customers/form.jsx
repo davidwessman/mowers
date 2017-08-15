@@ -17,7 +17,7 @@ class CustomerForm extends React.Component {
           error={errors.phone}
           id="phone"
           title="Telefon"
-          onChange={this.props.onPhoneChange}
+          onChange={this.props.onInputChange}
           value={this.props.fields.phone}
           type="tel"
         />
@@ -47,7 +47,16 @@ class CustomerForm extends React.Component {
         />
         <div className="field">
           <p className="control">
-            <button className="button is-primary" type="submit">
+            <button
+              className="button is-primary"
+              type="submit"
+              disabled={
+                this.props.fields.address === '' ||
+                this.props.fields.email === '' ||
+                this.props.fields.phone === '' ||
+                this.props.fields.name === ''
+              }
+            >
               Spara kund
             </button>
           </p>
@@ -67,13 +76,12 @@ CustomerForm.propTypes = {
     },
   ).isRequired,
   errors: PropTypes.shape({
-    address: PropTypes.string,
-    email: PropTypes.string,
-    name: PropTypes.string,
-    phone: PropTypes.string,
+    address: PropTypes.arrayOf(PropTypes.string),
+    email: PropTypes.arrayOf(PropTypes.string),
+    name: PropTypes.arrayOf(PropTypes.string),
+    phone: PropTypes.arrayOf(PropTypes.string),
   }),
   onInputChange: PropTypes.func.isRequired,
-  onPhoneChange: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
 };
 

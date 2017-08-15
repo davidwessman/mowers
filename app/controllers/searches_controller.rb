@@ -8,12 +8,16 @@ class SearchesController < ApplicationController
   end
 
   def customer
-    @customers = Customer.text_search(search_param)
+    @customers = Customer.full_search(customer_params)
   end
 
   private
 
   def search_param
     params.require(:search).fetch(:text, '')
+  end
+
+  def customer_params
+    params.require(:search).permit(:address, :email, :phone, :name)
   end
 end

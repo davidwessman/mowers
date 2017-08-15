@@ -21,7 +21,7 @@ class PickCustomer extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handlePhoneChange = this.handlePhoneChange.bind(this);
+    this.searchCustomers = this.searchCustomers.bind(this);
   }
 
   handleFormSubmit(e) {
@@ -67,10 +67,10 @@ class PickCustomer extends React.Component {
     this.setState({
       customer: newForm,
     });
+    this.searchCustomers();
   }
 
-  handlePhoneChange(event) {
-    this.handleInputChange(event);
+  searchCustomers() {
     fetch('/search/customer', {
       method: 'post',
       headers: {
@@ -80,7 +80,7 @@ class PickCustomer extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        search: { text: this.state.customer.phone },
+        search: this.state.customer,
       }),
       credentials: 'same-origin',
     })
@@ -113,7 +113,6 @@ class PickCustomer extends React.Component {
             <CustomerForm
               errors={this.state.errors}
               fields={this.state.customer}
-              onPhoneChange={this.handlePhoneChange}
               onInputChange={this.handleInputChange}
               onFormSubmit={this.handleFormSubmit}
             />

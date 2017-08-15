@@ -35,7 +35,7 @@ class CustomersTable extends React.Component {
 }
 
 CustomersTable.propTypes = {
-  customers: PropTypes.arrayOf(PropHelper.customer()).isRequired,
+  customers: PropTypes.arrayOf(PropTypes.shape(PropHelper.customer())).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
