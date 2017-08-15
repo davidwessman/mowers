@@ -28,6 +28,9 @@ class PickMower extends React.Component {
       },
     });
     this.getMowers(customerId);
+    if (this.new_mover) {
+      this.new_mower.setCustomer(customerId);
+    }
   }
 
   getMowers(customerId) {
@@ -71,6 +74,7 @@ class PickMower extends React.Component {
         <div className="columns">
           <div className="column is-6">
             <NewMower
+              ref={(n) => { this.new_mower = n; }}
               mower={this.state.mower}
               onCreate={this.props.onSelect}
               brands={this.props.brands}

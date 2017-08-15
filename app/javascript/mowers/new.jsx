@@ -16,6 +16,15 @@ class NewMower extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.setCustomer = this.setCustomer.bind(this);
+  }
+
+  setCustomer(customerId) {
+    this.setState({
+      mower: {
+        customer_id: customerId,
+      },
+    });
   }
 
   handleFormSubmit(e) {

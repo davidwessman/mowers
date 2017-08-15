@@ -73,9 +73,9 @@ class MowerForm extends React.Component {
 MowerForm.propTypes = {
   brands: PropTypes.shape(PropHelper.brands()).isRequired,
   errors: PropTypes.shape({
-    brand: PropTypes.string,
-    model: PropTypes.string,
-    year: PropTypes.string,
+    brand: PropTypes.arrayOf(PropTypes.string),
+    model: PropTypes.arrayOf(PropTypes.string),
+    year: PropTypes.arrayOf(PropTypes.string),
   }),
   mower: PropTypes.shape(PropHelper.mower()).isRequired,
   onFormSubmit: PropTypes.func.isRequired,
