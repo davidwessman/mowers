@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PropHelper from 'components/prop_helper';
-import MowerForm from 'mowers/form';
+import CustomerForm from 'customers/form';
 
-class NewMower extends React.Component {
+class EditCustomer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mower: props.mower,
+      customer: props.customer,
       errors: props.errors,
     };
 
@@ -16,21 +16,12 @@ class NewMower extends React.Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.updateState = this.updateState.bind(this);
-    this.setCustomer = this.setCustomer.bind(this);
-  }
-
-  setCustomer(customerId) {
-    this.setState({
-      mower: {
-        customer_id: customerId,
-      },
-    });
   }
 
   handleFormSubmit(e) {
     e.preventDefault();
-    fetch('/mowers', {
-      method: 'post',
+    fetch(`/customers/${this.props.customer.id}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -38,7 +29,7 @@ class NewMower extends React.Component {
         'X-CSRF-Token': this.token,
       },
       body: JSON.stringify({
-        mower: this.state.mower,
+        customer: this.state.customer,
       }),
       credentials: 'same-origin',
     })
@@ -49,42 +40,41 @@ class NewMower extends React.Component {
           errors: data.errors,
         });
       } else {
-        this.props.onCreate(data);
+        this.props.onUpdate(data);
       }
     });
   }
 
   updateState(field, value) {
-    const newForm = Object.assign({}, this.state.mower);
+    const newForm = Object.assign({}, this.state.customer);
     newForm[field] = value;
 
     this.setState({
-      mower: newForm,
+      customer: newForm,
     });
   }
 
+
   render() {
     return (
-      <MowerForm
+      <CustomerForm
         errors={this.state.errors}
-        mower={this.state.mower}
-        setState={this.updateState}
+        customer={this.state.customer}
+        updateState={this.updateState}
         onFormSubmit={this.handleFormSubmit}
-        brands={this.props.brands}
       />
     );
   }
 }
 
-NewMower.propTypes = {
-  mower: PropTypes.shape(PropHelper.mower()).isRequired,
-  errors: PropTypes.shape(PropHelper.mower()),
-  brands: PropTypes.shape(PropHelper.brands()).isRequired,
-  onCreate: PropTypes.func.isRequired,
+EditCustomer.propTypes = {
+  customer: PropTypes.shape(PropHelper.customer()).isRequired,
+  errors: PropTypes.shape(PropHelper.customer()),
+  onUpdate: PropTypes.func.isRequired,
 };
 
-NewMower.defaultProps = {
+EditCustomer.defaultProps = {
   errors: {},
 };
 
-export default NewMower;
+export default EditCustomer;
