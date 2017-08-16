@@ -30,12 +30,9 @@ class CustomersController < ApplicationController
   end
 
   def update
-    @customer = Customer.find(params[:id])
-    if @customer.update(customer_params)
-      redirect_to(customer_path(@customer), notice: t('.success'))
-    else
-      render(:edit, status: 422)
-    end
+    customer = Customer.find(params[:id])
+    customer.update!(customer_params)
+    render(json: customer, status: :ok)
   end
 
   private

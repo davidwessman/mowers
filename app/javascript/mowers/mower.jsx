@@ -46,17 +46,17 @@ class Mower extends React.Component {
                   <li><Icon icon="tag" />{this.props.mower.model}</li>
                   <li><Icon icon="calendar" /> {this.props.mower.year}</li>
                 </ul>
+                <a
+                  role="button"
+                  className="button is-primary"
+                  onClick={this.props.onEditClick}
+                  tabIndex={0}
+                >
+                  Redigera &nbsp;
+                  <Icon icon="wrench" />
+                </a>
               </div>
             </div>
-            <a
-              role="button"
-              className="button is-primary"
-              onClick={this.props.onEditClick}
-              tabIndex={0}
-            >
-              Redigera &nbsp;
-              <Icon icon="wrench" />
-            </a>
           </div>
         </div>
       </div>

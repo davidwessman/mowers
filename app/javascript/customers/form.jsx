@@ -1,8 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import PropHelper from 'components/prop_helper';
 import InputField from 'components/input_field';
 
 class CustomerForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.disabled = this.disabled.bind(this);
+  }
+
+  onInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.props.updateState(name, value);
+  }
+  disabled() {
+    return (!(this.props.customer.address &&
+              this.props.customer.email &&
+              this.props.customer.phone &&
+              this.props.customer.name));
+  }
+
   render() {
     const errors = {};
     if (this.props.errors) {
@@ -17,32 +39,32 @@ class CustomerForm extends React.Component {
           error={errors.phone}
           id="phone"
           title="Telefon"
-          onChange={this.props.onInputChange}
-          value={this.props.fields.phone}
+          onChange={this.onInputChange}
+          value={this.props.customer.phone}
           type="tel"
         />
         <InputField
           error={errors.email}
           id="email"
           title="E-post"
-          onChange={this.props.onInputChange}
-          value={this.props.fields.email}
+          onChange={this.onInputChange}
+          value={this.props.customer.email}
           type="email"
         />
         <InputField
           error={errors.name}
           id="name"
           title="Namn"
-          onChange={this.props.onInputChange}
-          value={this.props.fields.name}
+          onChange={this.onInputChange}
+          value={this.props.customer.name}
           type="text"
         />
         <InputField
           error={errors.address}
           id="address"
           title="Adress"
-          onChange={this.props.onInputChange}
-          value={this.props.fields.address}
+          onChange={this.onInputChange}
+          value={this.props.customer.address}
           type="text"
         />
         <div className="field">
@@ -50,12 +72,7 @@ class CustomerForm extends React.Component {
             <button
               className="button is-primary"
               type="submit"
-              disabled={
-                this.props.fields.address === '' ||
-                this.props.fields.email === '' ||
-                this.props.fields.phone === '' ||
-                this.props.fields.name === ''
-              }
+              disabled={this.disabled()}
             >
               Spara kund
             </button>
@@ -67,26 +84,19 @@ class CustomerForm extends React.Component {
 }
 
 CustomerForm.propTypes = {
-  fields: PropTypes.shape(
-    {
-      address: PropTypes.string,
-      email: PropTypes.string,
-      name: PropTypes.string,
-      phone: PropTypes.string,
-    },
-  ).isRequired,
+  customer: PropTypes.shape(PropHelper.customer()).isRequired,
   errors: PropTypes.shape({
     address: PropTypes.arrayOf(PropTypes.string),
     email: PropTypes.arrayOf(PropTypes.string),
     name: PropTypes.arrayOf(PropTypes.string),
     phone: PropTypes.arrayOf(PropTypes.string),
   }),
-  onInputChange: PropTypes.func.isRequired,
+  updateState: PropTypes.func.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
 };
 
 CustomerForm.defaultProps = {
-  fields: {
+  customer: {
     address: '',
     email: '',
     name: '',

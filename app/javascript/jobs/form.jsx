@@ -11,15 +11,18 @@ class JobForm extends React.Component {
     super(props);
     this.state = {
       customer: props.customer,
+      edit_customer: false,
       edit_mower: false,
-      mower: props.mower,
       mower_id: props.mower.id,
+      mower: props.mower,
       mowers: props.mowers,
     };
     const tokenElem = document.querySelector('meta[name="csrf-token"]');
     this.token = tokenElem && tokenElem.getAttribute('content');
 
     this.allowMowerEdit = this.allowMowerEdit.bind(this);
+    this.allowCustomerEdit = this.allowCustomerEdit.bind(this);
+    this.deselectCustomer = this.deselectCustomer.bind(this);
     this.deselectMower = this.deselectMower.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.selectCustomer = this.selectCustomer.bind(this);
@@ -60,8 +63,17 @@ class JobForm extends React.Component {
   selectCustomer(customer) {
     this.setState({
       customer,
+      edit_customer: false,
     });
     this.pick_mower.setCustomer(customer.id);
+  }
+
+  deselectCustomer() {
+    this.setState({
+      customer: {},
+      mower: {},
+    });
+    this.pick_customer.searchCustomers();
   }
 
   selectMower(mower) {
@@ -80,6 +92,12 @@ class JobForm extends React.Component {
     this.pick_mower.getMowers(this.state.customer.id);
   }
 
+  allowCustomerEdit() {
+    this.setState({
+      edit_customer: true,
+    });
+  }
+
   allowMowerEdit() {
     this.setState({
       edit_mower: true,
@@ -90,11 +108,17 @@ class JobForm extends React.Component {
     return (
       <div>
         <div className="columns">
-          <Customer customer={this.state.customer} />
+          <Customer
+            customer={this.state.customer}
+            edit={this.state.edit_customer}
+            onDeselect={this.deselectCustomer}
+            onEditClick={this.allowCustomerEdit}
+            onUpdate={this.selectCustomer}
+          />
           <Mower
-            mower={this.state.mower}
             brands={this.props.brands}
             edit={this.state.edit_mower}
+            mower={this.state.mower}
             onDeselect={this.deselectMower}
             onEditClick={this.allowMowerEdit}
             onSelect={this.selectMower}
@@ -102,15 +126,16 @@ class JobForm extends React.Component {
         </div>
         <PickCustomer
           onSelect={this.selectCustomer}
+          ref={(p) => { this.pick_customer = p; }}
           show={this.state.customer.id === undefined}
         />
         <PickMower
-          ref={(p) => { this.pick_mower = p; }}
-          onSelect={this.selectMower}
-          customer={this.state.customer}
-          show={this.state.mower.id === undefined && this.state.customer.id !== undefined}
-          mowers={this.state.mowers}
           brands={this.props.brands}
+          customer={this.state.customer}
+          mowers={this.state.mowers}
+          onSelect={this.selectMower}
+          ref={(p) => { this.pick_mower = p; }}
+          show={this.state.mower.id === undefined && this.state.customer.id !== undefined}
         />
         <hr />
         <form className="form" onSubmit={this.handleFormSubmit}>
