@@ -2,21 +2,24 @@
   <ul class="menu-list">
     <li>
       <%= link_to(root_path,
-                  class: aside_item_class(['home'])) do %>
+                  class: aside_item_class(['home']),
+                  tabindex: -1) do %>
         <%= fa_icon('home') %>
         <%= 'Hem' %>
       <% end %>
     </li>
     <li>
       <%= link_to(customers_path,
-                  class: aside_item_class(['customers'])) do %>
+                  class: aside_item_class(['customers']),
+                  tabindex: -1) do %>
         <%= fa_icon('users') %>
         <%= Customer.model_name.human(count: 2) %>
       <% end %>
     </li>
     <li>
       <%= link_to(mowers_path,
-                  class: aside_item_class(['mowers'])) do %>
+                  class: aside_item_class(['mowers']),
+                  tabindex: -1) do %>
         <%= fa_icon('car') %>
         <%= Mower.model_name.human(count: 2) %>
       <% end %>
@@ -29,7 +32,8 @@
     <% if signed_in? %>
       <li><%= current_user.email %></li>
       <li>
-        <%= link_to(sign_out_path, method: :delete) do %>
+        <%= link_to(sign_out_path, method: :delete,
+                                   tabindex: -1) do %>
           <%= fa_icon('user') %>
           <%= t('.sign_out') %>
         <% end %>

@@ -5,11 +5,12 @@ import PropHelper from 'components/prop_helper';
 class TableCustomer extends React.Component {
   render() {
     return (
-      <tr>
+      <tr className={this.props.customer.selected ? 'is-selected' : 'nope'}>
         <td>
           <button
             onClick={() => this.props.onClick(this.props.customer)}
             className="button is-primary is-small"
+            tabIndex={0}
           >
             Välj
           </button>

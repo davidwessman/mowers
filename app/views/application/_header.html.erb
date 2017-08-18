@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="navbar-brand">
-    <%= link_to(root_path, class: 'navbar-item') do %>
+    <%= link_to(root_path, class: 'navbar-item', tabindex: -1) do %>
       <%= image_tag('logo.png', style: 'max-height: 4em;') %>
     <% end %>
     <div class="navbar-burger burger" data-target="navMenu">
@@ -14,7 +14,8 @@
     <div class="navbar-start">
       <%= link_to('Home',
                   root_path,
-                  class: navbar_is_active('navbar-item is-tab is-hidden-desktop', 'home')) %>
+                  class: navbar_is_active('navbar-item is-tab is-hidden-desktop', 'home'),
+                  tabindex: -1) %>
       <div class="navbar-item has-dropdown is-hoverable">
         <%= link_to(Customer.model_name.human(count: 2),
                     customers_path,

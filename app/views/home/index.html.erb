@@ -1,8 +1,3 @@
-<% @customer ||= nil %>
-<h1 class="title is-1">
-  Startsida
-</h1>
-
 <% content_for(:sidemenu) do %>
   <%= render('shortcuts', active: @status) %>
 <% end %>
@@ -12,28 +7,25 @@
     <nav class="level is-mobile">
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading"><%= t('.active_projects') %></p>
-          <p class="title"><%= 1 %></p>
+          <p class="heading">Kunder</p>
+          <p class="title"><%= @count[:customers] %></p>
         </div>
       </div>
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading"><%= t('.completed_projects') %></p>
-          <p class="title"><%= 2 %></p>
+          <p class="heading">Gräsklippare</p>
+          <p class="title"><%= @count[:mowers] %></p>
         </div>
       </div>
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading"><%= t('.total_project_count') %></p>
-          <p class="title"><%= 3 %></p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading"><%= t('.logged_time_entries') %></p>
-          <p class="title">789</p>
+          <p class="heading">Jobb</p>
+          <p class="title"><%= @count[:jobs] %></p>
         </div>
       </div>
     </nav>
   </div>
 </div>
+
+<%= javascript_pack_tag('index') %>
+<%= react_component('Root') %>
