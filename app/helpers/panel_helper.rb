@@ -9,7 +9,7 @@ module PanelHelper
     if activated
       content_tag(:div, class: css) { yield }
     else
-      link_to(path, class: css) { yield }
+      link_to(path, class: css, tabindex: -1) { yield }
     end
   end
 
@@ -17,7 +17,7 @@ module PanelHelper
     if active == current
       content_tag(:li) { content_tag(:p, class: 'is-active') { yield } }
     else
-      content_tag(:li) { link_to(path) { yield } }
+      content_tag(:li) { link_to(path, tabindex: -1) { yield } }
     end
   end
 end

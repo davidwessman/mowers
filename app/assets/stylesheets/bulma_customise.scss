@@ -1,2 +1,10 @@
 $primary: #53ca1f; // Blue
 $primary-background: rgba($primary, .1);
+
+.button {
+  &.is-primary {
+    &:focus {
+      box-shadow: 0 0 2em $primary !important;
+    }
+  }
+}
