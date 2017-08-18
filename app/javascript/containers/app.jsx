@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CustomerTable from 'components/customer_table';
-import Customer from 'components/customer';
+import CustomerTable from 'components/customers/table';
+import Customer from 'components/customers/customer';
 import * as customerActions from 'actions/customers';
 
 const App = ({ customers, actions }) => (
