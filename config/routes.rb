@@ -31,5 +31,13 @@ Rails.application.routes.draw do
     post(:mower)
   end
 
+  namespace(:api) do
+    resources(:customers, only: %i[index create update])
+    resource(:search, only: []) do
+      post(:customer)
+      post(:mower)
+    end
+  end
+
   root(controller: :home, action: :index)
 end
