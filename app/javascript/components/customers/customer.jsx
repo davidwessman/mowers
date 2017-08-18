@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/icon';
+import IconButton from 'components/icon_button';
 import CustomerForm from 'components/customers/form';
 import * as states from 'constants/states';
 
@@ -18,15 +19,12 @@ class Customer extends React.Component {
                 <p className="card-header-title">
                   Kund
                 </p>
-                <a
-                  role="button"
-                  className="card-header-icon"
+                <IconButton
                   onClick={this.props.actions.onCustomerDeselect}
-                  tabIndex={-1}
-                >
-                  Avmarkera &nbsp;
-                  <Icon icon="times" />
-                </a>
+                  icon={'times'}
+                  text={'Avmarkera'}
+                  class={'card-header-icon'}
+                />
               </header>
               <div className="card-content">
                 <div className="media">
@@ -39,15 +37,11 @@ class Customer extends React.Component {
                       <li><Icon icon="home" /> {customer.address}</li>
                     </ul>
                     <br />
-                    <a
-                      role="button"
-                      className="button is-primary"
+                    <IconButton
                       onClick={this.props.actions.editCustomer}
-                      tabIndex={0}
-                    >
-                      Redigera &nbsp;
-                      <Icon icon="wrench" />
-                    </a>
+                      icon={'wrench'}
+                      text={'Redigera'}
+                    />
                   </div>
                 </div>
               </div>
@@ -70,15 +64,12 @@ class Customer extends React.Component {
       case states.EDIT:
         customer = this.props.customer.edit_data;
         const reset = (
-          <a
-            role="button"
-            className="card-header-icon"
+          <IconButton
             onClick={this.props.actions.onCustomerDeselect}
-            tabIndex={-1}
-          >
-            Avmarkera &nbsp;
-            <Icon icon="times" />
-          </a>
+            icon={'times'}
+            text={'Avmarkera'}
+            class={'card-header-icon'}
+          />
         );
         return (
           <CustomerForm
