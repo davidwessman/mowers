@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Customer < ApplicationRecord
-  has_many(:mowers)
+  has_many(:mowers, dependent: :destroy)
   validates(:name, :phone, :address, :email, presence: true)
   validates(:phone, :email, uniqueness: true)
 
