@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   namespace(:api) do
     resources(:customers, only: %i[index create update])
+    resources(:mowers, only: %i[create update])
     resource(:search, only: []) do
       post(:customer)
       post(:mower)

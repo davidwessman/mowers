@@ -37,7 +37,7 @@ export function editCustomerSubmit(event, data) {
 
 export function newCustomerInputChange(event) {
   return {
-    type: types.NEW_USER_INPUT_CHANGE,
+    type: types.NEW_CUSTOMER_INPUT_CHANGE,
     event,
   };
 }
@@ -51,7 +51,7 @@ export function newCustomerSearch(data) {
 
 export function editCustomerInputChange(event) {
   return {
-    type: types.EDIT_USER_INPUT_CHANGE,
+    type: types.EDIT_CUSTOMER_INPUT_CHANGE,
     event,
   };
 }
