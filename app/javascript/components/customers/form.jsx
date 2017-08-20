@@ -7,11 +7,16 @@ class CustomerForm extends React.Component {
   constructor(props) {
     super(props);
     this.disabled = this.disabled.bind(this);
-    this.onBlur = this.onBlur.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onBlur() {
-    this.props.onBlur(this.props.customer);
+  onSubmit(event) {
+    if (this.disabled()) {
+      event.preventDefault();
+      this.props.search(this.props.customer);
+    } else {
+      this.props.onFormSubmit(event, this.props.customer);
+    }
   }
 
   disabled() {
@@ -30,78 +35,57 @@ class CustomerForm extends React.Component {
     }
 
     return (
-      <div className="column is-6">
-        <div className="card">
-          <header className="card-header">
-            <p className="card-header-title">
-              {this.props.title}
-            </p>
-            {this.props.header}
-          </header>
-          <div className="card-content">
-            <div className="media">
-              <div className="media-content">
-                <form
-                  className="form"
-                  onSubmit={e => this.props.onFormSubmit(e, this.props.customer)}
-                >
-                  <InputField
-                    status={this.props.status}
-                    error={errors.phone}
-                    id="phone"
-                    title="Telefon"
-                    onChange={this.props.onInputChange}
-                    onBlur={this.onBlur}
-                    value={this.props.customer.phone}
-                    type="tel"
-                  />
-                  <InputField
-                    status={this.props.status}
-                    error={errors.email}
-                    id="email"
-                    title="E-post"
-                    onChange={this.props.onInputChange}
-                    onBlur={this.onBlur}
-                    value={this.props.customer.email}
-                    type="email"
-                  />
-                  <InputField
-                    status={this.props.status}
-                    error={errors.name}
-                    id="name"
-                    title="Namn"
-                    onChange={this.props.onInputChange}
-                    onBlur={this.onBlur}
-                    value={this.props.customer.name}
-                    type="text"
-                  />
-                  <InputField
-                    status={this.props.status}
-                    error={errors.address}
-                    id="address"
-                    title="Adress"
-                    onChange={this.props.onInputChange}
-                    onBlur={this.onBlur}
-                    value={this.props.customer.address}
-                    type="text"
-                  />
-                  <div className="field">
-                    <p className="control">
-                      <button
-                        className="button is-primary"
-                        type="submit"
-                        disabled={this.disabled()}
-                      >
-                        Spara kund
-                      </button>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </div>
+      <form
+        className="form"
+        onSubmit={this.onSubmit}
+      >
+        <InputField
+          status={this.props.status}
+          error={errors.phone}
+          id="phone"
+          title="Telefon"
+          onChange={this.props.onInputChange}
+          value={this.props.customer.phone}
+          type="tel"
+        />
+        <InputField
+          status={this.props.status}
+          error={errors.email}
+          id="email"
+          title="E-post"
+          onChange={this.props.onInputChange}
+          value={this.props.customer.email}
+          type="email"
+        />
+        <InputField
+          status={this.props.status}
+          error={errors.name}
+          id="name"
+          title="Namn"
+          onChange={this.props.onInputChange}
+          value={this.props.customer.name}
+          type="text"
+        />
+        <InputField
+          status={this.props.status}
+          error={errors.address}
+          id="address"
+          title="Adress"
+          onChange={this.props.onInputChange}
+          value={this.props.customer.address}
+          type="text"
+        />
+        <div className="field">
+          <div className="control">
+            <button
+              className={this.disabled() ? 'button is-warning' : 'button is-primary'}
+              type="submit"
+            >
+              {this.disabled() ? 'Sök' : 'Spara'}
+            </button>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }
@@ -115,11 +99,9 @@ CustomerForm.propTypes = {
     phone: PropTypes.arrayOf(PropTypes.string),
   }),
   onInputChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func,
+  search: PropTypes.func,
   onFormSubmit: PropTypes.func.isRequired,
-  title: PropTypes.string,
   status: PropTypes.string,
-  header: PropTypes.shape(),
 };
 
 CustomerForm.defaultProps = {
@@ -133,7 +115,7 @@ CustomerForm.defaultProps = {
     phone: '',
   },
   errors: {},
-  onBlur: () => {},
+  search: () => {},
 };
 
 export default CustomerForm;

@@ -62,12 +62,12 @@ function customer(state = initialCustomer, action) {
         state: states.EDIT,
         edit_data: state.data,
       });
-    case types.NEW_USER_INPUT_CHANGE:
+    case types.NEW_CUSTOMER_INPUT_CHANGE:
       return Object.assign({}, state, {
         data: inputChange(action.event, state.data),
         state: states.NEW,
       });
-    case types.EDIT_USER_INPUT_CHANGE:
+    case types.EDIT_CUSTOMER_INPUT_CHANGE:
       return Object.assign({}, state, {
         edit_data: inputChange(action.event, state.edit_data),
       });
@@ -87,8 +87,8 @@ export default function customers(state = initialState, action) {
     case types.CREATE_CUSTOMER_SUCCESS:
     case types.DESELECT_CUSTOMER:
     case types.EDIT_CUSTOMER:
-    case types.EDIT_USER_INPUT_CHANGE:
-    case types.NEW_USER_INPUT_CHANGE:
+    case types.EDIT_CUSTOMER_INPUT_CHANGE:
+    case types.NEW_CUSTOMER_INPUT_CHANGE:
     case types.SELECT_CUSTOMER:
     case types.UPDATE_CUSTOMER_ERROR:
     case types.UPDATE_CUSTOMER_SUCCESS:
