@@ -20,17 +20,6 @@ const getRequestData = (method = 'get', body = {}) => {
 const apiService = () => next => (action) => {
   next(action);
   switch (action.type) {
-    case types.GET_CUSTOMER_DATA:
-      fetch('/api/customers', getRequestData())
-      .then(response => response.json())
-      .then((data) => {
-        next({
-          type: types.GET_CUSTOMER_DATA_RECEIVED,
-          data,
-        });
-      });
-      break;
-
     case types.SEARCH_CUSTOMER_DATA:
       if (action.data === undefined || Object.keys(action.data).length === 0) return;
       fetch(
@@ -97,6 +86,58 @@ const apiService = () => next => (action) => {
         } else {
           next({
             type: types.UPDATE_CUSTOMER_SUCCESS,
+            data,
+          });
+        }
+      });
+      break;
+
+    case types.CREATE_MOWER:
+      fetch(
+        '/api/mowers',
+        getRequestData(
+          'post',
+          JSON.stringify({
+            mower: action.data,
+          }),
+        ),
+      )
+      .then(response => response.json())
+      .then((data) => {
+        if (data.errors !== undefined) {
+          next({
+            type: types.CREATE_MOWER_ERROR,
+            errors: data.errors,
+          });
+        } else {
+          next({
+            type: types.CREATE_MOWER_SUCCESS,
+            data,
+          });
+        }
+      });
+      break;
+
+    case types.UPDATE_MOWER:
+      fetch(
+        `/api/mowers/${action.data.id}`,
+        getRequestData(
+          'PATCH',
+          JSON.stringify({
+            mower: action.data,
+          }),
+        ),
+      )
+      .then(response => response.json())
+      .then((data) => {
+        if (data.errors !== undefined) {
+          next({
+            type: types.UPDATE_MOWER_ERROR,
+            errors: data.errors,
+          });
+        } else {
+          next({
+            type: types.UPDATE_MOWER_SUCCESS,
             data,
           });
         }

@@ -8,24 +8,40 @@ class MowerForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onInputChange = this.onInputChange.bind(this);
     this.onBrandChange = this.onBrandChange.bind(this);
-  }
-
-  onInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.props.setState(name, value);
+    this.disabled = this.disabled.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onBrandChange(selected) {
     const value = (selected !== null) ? selected.value : '';
-    this.props.setState('brand', value);
+    const event = {
+      target: {
+        type: 'select',
+        name: 'brand',
+        value,
+      },
+    };
+    this.props.onInputChange(event);
+  }
+
+  onSubmit(event) {
+    this.props.onFormSubmit(event, this.props.mower, this.props.customer);
+  }
+
+  disabled() {
+    return (!(this.props.mower.brand &&
+              this.props.mower.model &&
+              this.props.mower.year));
   }
 
   render() {
+    const brands = {
+      other: 'Annat',
+      husqvarna: 'Husqvarna',
+      stiga: 'Stiga',
+      klippo: 'Klippo',
+    };
     const errors = {};
     if (this.props.errors) {
       Object.keys(this.props.errors).forEach((key) => {
@@ -34,19 +50,19 @@ class MowerForm extends React.Component {
     }
 
     return (
-      <form className="form" onSubmit={this.props.onFormSubmit}>
+      <form className="form" onSubmit={this.onSubmit}>
         <SelectField
           id="brand-select"
           title="Märke"
           value={this.props.mower.brand}
-          options={this.props.brands}
+          options={brands}
           onChange={this.onBrandChange}
         />
         <InputField
           error={errors.model}
           id="model"
           title="Modell"
-          onChange={this.onInputChange}
+          onChange={this.props.onInputChange}
           value={this.props.mower.model}
           type="text"
         />
@@ -54,13 +70,17 @@ class MowerForm extends React.Component {
           error={errors.year}
           id="year"
           title="Tillverkningsår"
-          onChange={this.onInputChange}
+          onChange={this.props.onInputChange}
           value={this.props.mower.year}
           type="text"
         />
         <div className="field">
           <p className="control">
-            <button className="button is-primary" type="submit">
+            <button
+              className="button is-primary"
+              type="submit"
+              disabled={this.disabled()}
+            >
               Spara
             </button>
           </p>
@@ -71,7 +91,6 @@ class MowerForm extends React.Component {
 }
 
 MowerForm.propTypes = {
-  brands: PropTypes.shape(PropHelper.brands()).isRequired,
   errors: PropTypes.shape({
     brand: PropTypes.arrayOf(PropTypes.string),
     model: PropTypes.arrayOf(PropTypes.string),
@@ -79,7 +98,8 @@ MowerForm.propTypes = {
   }),
   mower: PropTypes.shape(PropHelper.mower()).isRequired,
   onFormSubmit: PropTypes.func.isRequired,
-  setState: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  customer: PropTypes.number.isRequired,
 };
 
 MowerForm.defaultProps = {
