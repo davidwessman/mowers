@@ -4,6 +4,16 @@ module Api
   # Controller to handle CRUD-actions for mowers
   class MowersController < ApplicationController
     before_action(:require_login)
+
+    def index
+      mowers = if params[:customer].present?
+                 Mower.where(customer: params[:customer])
+               else
+                 Mower.all
+               end
+      render(json: mowers, status: :ok)
+    end
+
     def create
       mower = Mower.create!(mower_params)
       render(json: mower, status: :ok)

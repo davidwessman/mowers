@@ -31,9 +31,11 @@ Rails.application.routes.draw do
     post(:mower)
   end
 
-  namespace(:api) do
+  namespace(:api, defaults: { format: :json }) do
     resources(:customers, only: %i[index create update])
-    resources(:mowers, only: %i[create update])
+    resources(:mowers, only: %i[create update]) do
+      post(:customer, on: :collection, action: :index)
+    end
     resource(:search, only: []) do
       post(:customer)
       post(:mower)

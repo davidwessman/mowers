@@ -38,4 +38,21 @@ RSpec.describe('API::Mowers', type: :request) do
 
     expect(Mower.where(id: mower.id)).to be_empty
   end
+
+  it('fetches all mowers for a customer') do
+    sign_in
+    customer = create(:customer)
+    create(:mower, customer: customer, model: 'stor och stark')
+    create(:mower, customer: customer, model: 'bra robot')
+    create(:mower, customer: customer, model: 'mycket klipp')
+    create(:mower, model: 'inte en klippare') # other customer
+    post(customer_api_mowers_path, params: { customer: customer.id }.to_json,
+                                   headers: json_header)
+    expect(response).to have_http_status(200)
+    expect(response.parsed_body.count).to eq(3)
+    expect(response.body).to include('stor och stark')
+    expect(response.body).to include('bra robot')
+    expect(response.body).to include('mycket klipp')
+    expect(response.body).not_to include('inte en klippare')
+  end
 end
