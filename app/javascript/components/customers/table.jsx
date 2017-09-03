@@ -11,38 +11,36 @@ class CustomerTable extends React.Component {
     if (state !== states.NEW) return null;
 
     return (
-      <div className="tile is-8 is-parent">
-        <div className="tile is-child">
-          <div className="card mower">
-            <header className="card-header">
-              <p className="card-header-title">
-                Kunder
-              </p>
-            </header>
-            <div className="card-content">
-              <div className="media">
-                <div className="media-content">
-                  <table className="table is-fullwidth">
-                    <thead>
-                      <tr>
-                        <th />
-                        <th>Namn</th>
-                        <th>Telefon</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {customers.map(customer => (
-                        <TableCustomer
-                          key={customer.id}
-                          customer={customer}
-                          onClick={actions.selectCustomer}
-                        />
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+      <div className="tile is-child">
+        <div className="card mower">
+          <header className="card-header">
+            <p className="card-header-title">
+              Kunder
+            </p>
+          </header>
+          <div className="card-content">
+            <div className="media">
+              <div className="media-content">
+                <table className="table is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th />
+                      <th>Namn</th>
+                      <th>Telefon</th>
+                      <th>Address</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {customers.map(customer => (
+                      <TableCustomer
+                        key={customer.id}
+                        customer={customer}
+                        onClick={actions.selectCustomer}
+                      />
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

@@ -104,14 +104,12 @@ class Customer extends React.Component {
 
   render() {
     return (
-      <div className="tile is-4 is-parent">
-        <div className="tile is-child">
-          <div className="card">
-            {this.header()}
-            <div className="card-content">
-              <div className="media">
-                {this.content()}
-              </div>
+      <div className="tile is-child">
+        <div className="card">
+          {this.header()}
+          <div className="card-content">
+            <div className="media">
+              {this.content()}
             </div>
           </div>
         </div>
