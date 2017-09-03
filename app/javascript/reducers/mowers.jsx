@@ -29,6 +29,7 @@ function mower(state = initialMower, action) {
         data: action.data,
         state: states.SELECTED,
       });
+    case types.DESELECT_CUSTOMER:
     case types.DESELECT_MOWER:
       return Object.assign({}, state, {
         data: {},
@@ -41,7 +42,6 @@ function mower(state = initialMower, action) {
         errors: action.errors,
       });
     case types.CREATE_MOWER_SUCCESS:
-      console.log(action);
       return Object.assign({}, state, {
         state: states.SELECTED,
         errors: {},
@@ -80,7 +80,7 @@ function mower(state = initialMower, action) {
 
 export default function mowers(state = initialState, action) {
   switch (action.type) {
-    case types.GET_MOWER_DATA_RECEIVED:
+    case types.GET_MOWERS_RECEIVED:
       return Object.assign({}, state, {
         all: action.data,
       });
@@ -88,6 +88,7 @@ export default function mowers(state = initialState, action) {
     case types.CREATE_MOWER_ERROR:
     case types.CREATE_MOWER_SUCCESS:
     case types.DESELECT_MOWER:
+    case types.DESELECT_CUSTOMER:
     case types.EDIT_MOWER:
     case types.EDIT_MOWER_INPUT_CHANGE:
     case types.NEW_MOWER_INPUT_CHANGE:

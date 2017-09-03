@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MowerData from 'components/mowers/data';
 import MowerForm from 'components/mowers/form';
+import IconButton from 'components/icon_button';
 import * as states from 'constants/states';
 
 class Mower extends React.Component {
@@ -14,12 +15,36 @@ class Mower extends React.Component {
 
   header() {
     switch (this.props.mower.state) {
-      case states.SELECTED:
-        return <p className="card-header-title">Gräsklippare</p>;
       case states.NEW:
-        return <p className="card-header-title">Ny gräsklippare</p>;
+        return (
+          <header className="card-header">
+            <p className="card-header-title">Ny gräsklippare</p>
+          </header>
+        );
+      case states.SELECTED:
+        return (
+          <header className="card-header">
+            <p className="card-header-title">Gräsklippare</p>
+            <IconButton
+              onClick={this.props.actions.onMowerDeselect}
+              icon={'times'}
+              text={'Avmarkera'}
+              class={'card-header-icon'}
+            />
+          </header>
+        );
       case states.EDIT:
-        return <p className="card-header-title">Redigera gräsklippare</p>;
+        return (
+          <header className="card-header">
+            <p className="card-header-title">Redigera gräsklippare</p>
+            <IconButton
+              onClick={this.props.actions.onMowerDeselect}
+              icon={'times'}
+              text={'Avmarkera'}
+              class={'card-header-icon'}
+            />
+          </header>
+        );
 
       default:
         return null;
@@ -29,7 +54,17 @@ class Mower extends React.Component {
   content() {
     switch (this.props.mower.state) {
       case states.SELECTED:
-        return <MowerData mower={this.props.mower.data} />;
+        return (
+          <div>
+            <MowerData mower={this.props.mower.data} />
+            <br />
+            <IconButton
+              onClick={this.props.actions.editMower}
+              icon={'wrench'}
+              text={'Redigera'}
+            />
+          </div>
+        );
       case states.NEW:
         return (
           <MowerForm
@@ -45,7 +80,7 @@ class Mower extends React.Component {
           <MowerForm
             customer={this.props.customer}
             errors={this.props.mower.errors}
-            mower={this.props.mower.data}
+            mower={this.props.mower.edit_data}
             onFormSubmit={this.props.actions.editMowerSubmit}
             onInputChange={this.props.actions.editMowerInputChange}
           />
@@ -59,11 +94,9 @@ class Mower extends React.Component {
   render() {
     if (this.props.customerState === states.NEW) return null;
     return (
-      <div className="column is-6">
+      <div className="tile is-child">
         <div className="card">
-          <header className="card-header">
-            {this.header()}
-          </header>
+          {this.header()}
           <div className="card-content">
             <div className="media">
               <div className="media-content">
@@ -87,6 +120,6 @@ Mower.propTypes = {
 Mower.defaultProps = {
   customerState: states.NEW,
   customer: -1,
-}
+};
 
 export default Mower;

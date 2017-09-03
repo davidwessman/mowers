@@ -143,6 +143,25 @@ const apiService = () => next => (action) => {
         }
       });
       break;
+    case types.SELECT_CUSTOMER:
+      if (action.data === undefined) return;
+      fetch(
+        '/api/mowers/customer',
+        getRequestData(
+          'post',
+          JSON.stringify({
+            customer: action.data.id,
+          }),
+        ),
+      )
+      .then(response => response.json())
+      .then((data) => {
+        next({
+          type: types.GET_MOWERS_RECEIVED,
+          data,
+        });
+      });
+      break;
 
     default:
       break;
