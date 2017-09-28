@@ -1,0 +1,5 @@
+<% url ||= nil %>
+<%= simple_form_for(job, url: url) do |f| %>
+  <%= f.association(:mower, hidden)
+  <%= bulma_button(f) %>
+<% end %>

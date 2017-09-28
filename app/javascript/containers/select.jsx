@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CustomerTable from 'components/customers/table';
 import Customer from 'components/customers/customer';
+import SelectCustomer from 'components/customers/select';
+import SelectMower from 'components/mowers/select';
 import Mower from 'components/mowers/mower';
-import MowerTable from 'components/mowers/table';
 import * as states from 'constants/states';
 
 class Select extends React.Component {
@@ -20,36 +20,20 @@ class Select extends React.Component {
     const actions = this.props.actions;
     return (
       <div className="tile is-vertical">
-        <div className="tile">
-          <div className="tile is-parent is-4">
-            <Customer customer={customers.customer} actions={actions.customers} />
-          </div>
-          <div className="tile is-parent">
-            <CustomerTable
-              actions={actions.customers}
-              customers={customers.all}
-              state={customers.customer.state}
-            />
-          </div>
-        </div>
-        <div className="tile">
-          <div className="tile is-parent is-4">
-            <Mower
-              mower={mowers.mower}
-              actions={actions.mowers}
-              customer={customers.customer.data.id}
-              customerState={customers.customer.state}
-            />
-          </div>
-          <div className="tile is-parent">
-            <MowerTable
-              mowers={mowers.all}
-              actions={actions.mowers}
-              mowerState={mowers.mower.state}
-              customerState={customers.customer.state}
-            />
-          </div>
-        </div>
+        <SelectCustomer
+          all={customers.all}
+          single={customers.customer}
+          actions={actions.customers}
+          state={customers.customer.state}
+        />
+        <SelectMower
+          all={mowers.all}
+          single={mowers.mower}
+          actions={actions.mowers}
+          state={mowers.mower.state}
+          customerState={customers.customer.state}
+          customer={customers.customer.data.id}
+        />
       </div>
     );
   }

@@ -10,26 +10,31 @@ import Job from 'components/jobs/job';
 
 const App = ({ customers, jobs, mowers, actions }) => (
   <div className="tile is-ancestor is-vertical">
-    <Select customers={customers} mowers={mowers} actions={actions} />
+    <Select
+      actions={actions}
+      customers={customers}
+      jobs={jobs}
+      mowers={mowers}
+      status={status}
+    />
     <Job
-      job={jobs.job}
-      customer={customers.customer}
-      mower={mowers.mower}
       actions={actions.jobs}
+      mower={mowers.mower}
+      job={jobs.job}
     />
   </div>
 );
 
 App.propTypes = {
+  actions: PropTypes.shape().isRequired,
   customers: PropTypes.shape().isRequired,
   jobs: PropTypes.shape().isRequired,
   mowers: PropTypes.shape().isRequired,
-  actions: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = state => ({
-  jobs: state.jobs,
   customers: state.customers,
+  jobs: state.jobs,
   mowers: state.mowers,
 });
 

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :job do
-    mower nil
-    status 1
+    mower
+    status { Job.statuses.keys.sample }
   end
 end

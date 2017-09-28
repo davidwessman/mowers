@@ -1,0 +1,31 @@
+<% content_for(:sidemenu) do %>
+  <%= render('panel', active: :show_job, job: @job) %>
+<% end %>
+
+<%= job_title(@job.status) %>
+<h2 class="subtitle is-3"><%= @job %></h2>
+
+<div class="tile is-ancestor">
+  <div class="tile is-vertical">
+    <div class="tile">
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <%= render(@job.customer) %>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <div class="tile is-child">
+          <%= render(@job.mower) %>
+        </div>
+      </div>
+    </div>
+    <div class="tile is-parent">
+      <div class="tile is-child">
+      </div>
+    </div>
+    <div class="tile is-parent">
+      <div class="tile is-child">
+      </div>
+    </div>
+  </div>
+</div>

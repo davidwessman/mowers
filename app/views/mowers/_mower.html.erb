@@ -1,1 +1,22 @@
-<%= mower.to_s %>
+<div class="card mower">
+  <header class="card-header">
+    <p class="card-header-title">
+      <%= Mower.model_name.human %>
+    </p>
+    <%= link_to(fa_icon('wrench'), edit_mower_path(mower),
+                                   class: 'card-header-icon') %>
+  </header>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4"><%= mower.to_s %></p>
+        <ul>
+          <li><%= fa_icon('hashtag', text: t('.mower_id', id: mower.id)) %></li>
+          <li><%= fa_icon('tasks', text: mower.brand) %></li>
+          <li><%= fa_icon('tag', text: mower.model) %></li>
+          <li><%= fa_icon('calendar', text: mower.year) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

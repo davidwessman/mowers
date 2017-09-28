@@ -1,8 +1,0 @@
-<h1 class="title is-1"><%= t('.title') %></h1>
-
-<% content_for(:sidemenu) do %>
-  <%= render('panel', active: :show) %>
-<% end %>
-
-<%= javascript_pack_tag('jobs')%>
-<%= react_component('JobForm', brands: mower_brands_h, customer: @customer, mower: @mower) %>

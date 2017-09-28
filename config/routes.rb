@@ -16,13 +16,10 @@ Rails.application.routes.draw do
 
   resources(:customers)
   resources(:mowers, except: %i[show])
-  resources(:jobs, only: %i[create index]) do
+  resources(:jobs, only: %i[index show new]) do
     collection do
       get('l/:customer_id', action: :customer, as: :customer)
       get('l/:customer_id/:mower_id', action: :mower, as: :mower)
-      post(:find_customer)
-      post(:create_customer)
-      post(:create_mower)
     end
   end
 
@@ -36,6 +33,12 @@ Rails.application.routes.draw do
     resources(:mowers, only: %i[create update]) do
       post(:customer, on: :collection, action: :index)
     end
+
+    resources(:jobs, only: %i[create update destroy]) do
+      post(:customer, on: :collection)
+      post(:mower, on: :collection)
+    end
+
     resource(:search, only: []) do
       post(:customer)
       post(:mower)
