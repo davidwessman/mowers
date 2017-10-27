@@ -14,7 +14,7 @@ gem 'jbuilder'
 gem 'mini_magick'
 gem 'oj' # JSON-serialization, recommended for rollbar
 gem 'pg'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.10'
 gem 'rollbar' # Error reporting
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
