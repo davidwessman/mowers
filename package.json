@@ -38,7 +38,7 @@
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.2",
     "turbolinks": "^5.1.1",
-    "webpack": "^3.5.5",
+    "webpack": "^3.10.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0",
     "webpacker-react": "^0.3.2"
