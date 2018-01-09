@@ -41,7 +41,7 @@
     "webpack": "^3.5.5",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0",
-    "webpacker-react": "^0.3.0"
+    "webpacker-react": "^0.3.2"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
