@@ -14,7 +14,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "bulma": "^0.6.1",
     "compression-webpack-plugin": "^0.4.0",
-    "css-loader": "^0.28.4",
+    "css-loader": "^0.28.8",
     "extract-text-webpack-plugin": "^2.1.0",
     "fetch": "^1.1.0",
     "file-loader": "^0.11.2",
