@@ -24,7 +24,7 @@
     "path-complete-extname": "^0.1.0",
     "pikaday": "^1.6.0",
     "postcss-loader": "^2.0.5",
-    "postcss-smart-import": "^0.7.4",
+    "postcss-smart-import": "^0.7.6",
     "precss": "^2.0.0",
     "prop-types": "^15.5.10",
     "rails-erb-loader": "^5.0.1",
