@@ -35,7 +35,7 @@
     "react_ujs": "^2.4.3",
     "redux": "^3.7.2",
     "resolve-url-loader": "^2.2.1",
-    "sass-loader": "^6.0.5",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "turbolinks": "^5.1.1",
     "webpack": "^3.10.0",
