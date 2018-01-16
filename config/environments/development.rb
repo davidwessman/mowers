@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -52,7 +54,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.x.webpacker[:dev_server_host] = "http://127.0.0:8080"
+  config.x.webpacker[:dev_server_host] = 'http://127.0.0:8080'
 
   config.after_initialize do
     Bullet.enable = true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BulmaFormHelper
   def bulma_horizontal(model)
     simple_form_for(model,
