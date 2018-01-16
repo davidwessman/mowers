@@ -11,10 +11,10 @@ namespace(:db) do
     user.password = 'passpass'
     user.save!
     puts User.last.name
-    puts "=== Sign in to Admin User with: ==="
-    puts "=== email: admin@wessman.co ==="
-    puts "=== pass: passpass ==="
+    puts '=== Sign in to Admin User with: ==='
+    puts '=== email: admin@wessman.co ==='
+    puts '=== pass: passpass ==='
 
-    10.times { FactoryGirl.create(:customer) }
+    10.times { FactoryBot.create(:customer) }
   end
 end

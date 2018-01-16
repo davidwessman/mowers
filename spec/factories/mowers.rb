@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :mower do
     customer
     brand { Mower.brands.keys.sample }

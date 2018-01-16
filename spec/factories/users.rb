@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Creates users for testing
-FactoryGirl.define do
+FactoryBot.define do
   factory(:user) do
     email
     password 'passpass'

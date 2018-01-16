@@ -2,9 +2,9 @@
 
 module RequestMacro
   def sign_in
-    raise("`sign_in` helper requires factory_girl") unless defined?(FactoryGirl)
+    raise('`sign_in` helper requires factory_bot') unless defined?(FactoryBot)
 
-    sign_in_as(FactoryGirl.create(:user))
+    sign_in_as(FactoryBot.create(:user))
   end
 
   def sign_in_as(user)
@@ -15,6 +15,6 @@ module RequestMacro
   end
 
   def json_header
-    { "CONTENT_TYPE": "application/json" }
+    { 'CONTENT_TYPE': 'application/json' }
   end
 end
