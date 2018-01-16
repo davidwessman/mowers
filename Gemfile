@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.1'
+ruby '2.5.0'
 gem 'rails', '~> 5.1.4'
 
 gem 'clearance' # Authentication
@@ -13,7 +13,7 @@ gem 'font-awesome-rails'
 gem 'jbuilder'
 gem 'mini_magick'
 gem 'oj' # JSON-serialization, recommended for rollbar
-gem 'pg'
+gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.11'
 gem 'rollbar' # Error reporting
 gem 'sass-rails', '~> 5.0'
@@ -28,9 +28,9 @@ gem 'webpacker-react'
 group :development, :test do
   gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 2.17'
+  gem 'capybara'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
@@ -40,8 +40,9 @@ group :development do
   gem 'foreman'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails_real_favicon'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop'
   gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
 
