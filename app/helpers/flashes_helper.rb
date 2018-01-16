@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 module FlashesHelper
   def user_facing_flashes
-    flash.to_hash.slice("alert", "error", "notice", "success")
+    flash.to_hash.slice('alert', 'error', 'notice', 'success')
   end
 
   def bulma_notification(flash)
-    case(flash)
-    when('alert')
+    case flash
+    when 'alert'
       'warning'
-    when('error')
+    when 'error'
       'danger'
-    when('notice')
+    when 'notice'
       'info'
     when 'success'
       'success'

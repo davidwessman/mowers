@@ -9,7 +9,7 @@ RSpec.describe('Customers', type: :request) do
     attributes = { name: 'David', phone: '070560',
                    address: 'Havet, 26376 Nyhamnsläge',
                    email: 'david@wessman.co' }
-    headers = { "CONTENT_TYPE": "application/json" }
+    headers = { "CONTENT_TYPE": 'application/json' }
     post(customers_path, params: { customer: attributes }.to_json,
                          headers: headers)
     customer = Customer.last
