@@ -1,4 +1,4 @@
-import WebpackerReact from 'webpacker-react';
-import Root from 'root';
+// import WebpackerReact from 'webpacker-react';
+// import Root from 'root';
 
-WebpackerReact.setup({ Root });
+// WebpackerReact.setup({ Root });

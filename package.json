@@ -2,6 +2,7 @@
   "name": "mowers",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "3.4",
     "autoprefixer": "^7.1.1",
     "babel-core": "^6.26.0",
     "babel-loader": "7.x",
@@ -27,6 +28,7 @@
     "rails-erb-loader": "^5.2.1",
     "react": "^16.2.0",
     "react-redux": "^5.0.6",
+    "react-select": "^1.2.1",
     "react_ujs": "^2.4.3",
     "redux": "^3.7.2",
     "resolve-url-loader": "^2.2.1",
@@ -43,6 +45,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "2.11.2"
   }
 }
